@@ -1,7 +1,5 @@
 #!/bin/bash
- 
-MY_PATH=$(dirname "$0")
-FOLDER_NAME=$(date '+%Y-%m-%d-%H-%M-%S')
+
 PASSED=$1
 
 if [ -d "$PASSED" ]; then
@@ -13,7 +11,3 @@ else
 		echo "is not valid";
 	fi
 fi
-
-# mkdir $MY_PATH/backup/$FOLDER_NAME
-# cp $MY_PATH/data/* $MY_PATH/backup/$FOLDER_NAME
-# rm -r $FOLDER_NAME

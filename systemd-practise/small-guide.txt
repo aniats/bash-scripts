@@ -1,0 +1,24 @@
+touch my-first-daemon.service
+nano my-first.daemon.service
+
+           [Unit]
+           Description=Foo
+
+           [Service]
+           ExecStart=/usr/sbin/foo-daemon
+
+           [Install]
+           WantedBy=multi-user.target
+
+cp my-first-daemon.service /etc/systemd/system (sudo!!!)
+systemctl daemon-reload
+systemctl start my-first-daemon.service 
+systemctl status my-first-daemon.service 
+
+// To make it work automatically after reboot:
+systemctl enable $servicename
+// And start the service after "enable"
+systemctl start $servicename
+
+// To stop it
+systemctl stop $servicename

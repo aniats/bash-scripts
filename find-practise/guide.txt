@@ -1,0 +1,89 @@
+Search
+Link: https://lms.crafted.su/unix-course/2020-2021/topics/024-searching-files-practice.html
+
+Базовые задачи на поиск (find)
+
+Найдите файл с названием test.txt в текущем рабочем каталоге.
+find test.txt
+
+Найдите файл с названием unix.txt в каталоге /home.
+find ~ unix.txt
+
+Найдите файл с названием linux.txt без учёта регистра в домашнем каталоге пользователя.
+find ~ -iname linux.txt
+
+Найдите каталог с названием user во всей файловой системе.
+To get rid of permission errors (and such), you can redirect stderr to nowhere
+find / -name "user" 2>/dev/null
+
+Найдите в текущем рабочем каталоге файлы, заканчивающиеся расширением .sh.
+find -name "*.sh"  
+
+
+Поиск по правам доступа
+
+
+
+Найдите все обычные файлы с правами доступа 777 в текущем рабочем каталоге.
+find -type f -perm 777     
+
+Найдите все обычные файлы, у которых права доступа не равны 777 в корневом каталоге.
+???
+find / -type f -not -perm 777 | wc -l    
+find . -name playground      
+
+Найдите все файлы, доступные на чтение владельцу во всей файловой системе.
+find / -type d -perm -u+r
+
+Найдите все файлы, доступные на исполнение всем пользователям во всей файловой системе.
+find / -executable -type f
+This will find files in the current directory that are either executable by their owner, by group members or by others:
+find / -perm /u=x,g=x,o=x
+
+Найдите все обычные файлы с правами доступа 777 и исправьте их на права по умолчанию. Поиск производить в домашнем каталоге.
+find ~ -type f -perm 0777 == find all files with 0777 perm
+Link: https://stackoverflow.com/questions/3740152/how-to-change-permissions-for-a-folder-and-its-subfolders-files-in-one-step
+find ~ -type f -perm 0777 -exec chmod 775 '{}' ';' 
+
+Найдите все директории с правами доступа 777 и исправьте их на права по умолчанию. Поиск производите в домашнем каталоге пользователя.
+find ! -type d -perm 0777 -exec chmod 775 '{}' ';' 
+
+Найдите в текущем рабочем каталоге пользователя файл test.txt и удалите его с помощью встроенного действия.
+find . -type f -name "test.txt" -delete  
+
+Выполните предыдущее задание с помощью вызова внешнего приложения.
+find . -name test.txt -exec rm "{}" +  
+
+Найдите в домашнем каталоге пользователя все файлы с расширением mp3 и удалите их с помощью внешнего приложения.
+find . -type f -name "*.mp3" -delete 
+
+Решите предыдущую задачу, однако обеспечьте запуск внешнего приложения только один раз.
+find . -type f -name "*.mp3" -exec rm "{}" +
+
+Найдите все пустые файлы в каталоге /tmp.
+find /tmp -type f -empty  
+
+Найдите все пустые каталоги в каталоге /var/run.
+find /var/run -type d -empty  
+
+Найдите все скрытые файлы в каталоге /tmp.
+find /tmp -type f -iname ".*" -ls
+
+
+
+Поиск с использованием владельца
+
+
+
+Найдите во всей файловой системе файл fstab, принадлежащий пользователю root.
+find / fstab | grep stab 
+find / fstab -user root | grep stab  
+
+Найдите все фалы, принадлежащие текущему пользователю, в каталоге /tmp.
+find /tmp -user user | wc -l 
+find /tmp -user $USER | wc -l 
+
+Найдите все директории, принадлежащие группе staff в каталоге /usr/local.
+
+
+Найдите все файлы с расширением txt, принадлежащие пользователю user, в каталоге /home.

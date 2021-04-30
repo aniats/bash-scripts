@@ -6,3 +6,11 @@
 5. Рестартим nginx в systemd: sudo systemctl restart nginx
 6. Запускаем вне виртуалки наш сайт по ip и порту. Можем узнать наш ip: hostname -I
 
+Несколько доменных имен.
+1. Добавляем хосты. Идем в c:/windows/system32/drivers/etc/hosts. Добавляем следующее: 127.0.0.1 *server-name*.
+2. Создаем новые папочки в /var/www/*folder-site-name*.
+3. Новые конфигурации под эти сайтики в /etc/nginx/sites-available/. Берем готовый шаблон и стираем соотв. строки, где есть default_server. Server_name должен соотв. нашему сайту и названию в hosts (см. 1 пункт).
+4. Создаем снова символические ссылочки в /etc/nginx/sites-enabled.
+5. sudo nginx -t
+6. sudo systemctl restart nginx
+7. Enjoy.

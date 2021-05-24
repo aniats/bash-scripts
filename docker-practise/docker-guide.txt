@@ -1,6 +1,6 @@
 1. sudo docker pull debian:buster
 2. sudo docker ls
-3. sudo docker run -ti debian:buster
+3. sudo docker run -ti debian:buster /bin/bash
 4. apt-get update
 5. apt-get install squid
 6. squid --help

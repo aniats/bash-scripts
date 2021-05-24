@@ -1,0 +1,15 @@
+1. sudo docker pull debian:buster
+2. sudo docker ls
+3. sudo docker run -ti debian:buster
+4. apt-get update
+5. apt-get install squid
+6. squid --help
+7. exit
+8. squid --help
+
+
+sudo docker ps -a ==  посмотреть все контейнеры, включая скрытые
+sudo docker images == посмотреть все образы
+sudo docker rm *code_name_for_backup* == удалить бекап
+sudo docker rmi *image_name* == удалить образ
+sudo docker *container_name* exec *command* == выполнить команду в контейнере

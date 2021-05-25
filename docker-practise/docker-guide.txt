@@ -1,3 +1,15 @@
+Small CheetSheet
+
+sudo docker run -ti debian:buster /bin/bash == ti - interactive terminal (it/ti)
+sudo docker ps -a ==  посмотреть все контейнеры, включая остановленные
+sudo docker images == посмотреть все образы
+sudo docker rm *code_name_for_container* == удалить контейнер
+sudo docker rmi *image_name* == удалить образ
+sudo docker *container_name* exec *command* == выполнить команду в контейнере
+sudo docker run --rm debian:buster == запустить контейнер и удалить его сразу после выхода
+
+Задача № 2: Запуск команд внутри базового контейнера
+
 1. sudo docker pull debian:buster
 2. sudo docker ls
 3. sudo docker run -ti debian:buster /bin/bash
@@ -7,9 +19,18 @@
 7. exit
 8. squid --help
 
+Задача № 3: Проверка списка локальных контейнеров и образов
 
-sudo docker ps -a ==  посмотреть все контейнеры, включая скрытые
-sudo docker images == посмотреть все образы
-sudo docker rm *code_name_for_backup* == удалить бекап
-sudo docker rmi *image_name* == удалить образ
-sudo docker *container_name* exec *command* == выполнить команду в контейнере
+1. sudo docker ps
+2. sudo docker ps -a
+
+Задача № 6: Предоставление доступа к файловой системе хоста
+
+1. mkdir /tmp/common-data
+2. cd /tmp/common-data
+3. sudo docker run --rm -ti --mount type=bind,source="/tmp/common-data",target="/var/common-data" debian:buster /bin/bash
+
+Задача № 7: Предоставление доступа на чтение к файловой системе хоста
+
+1. sudo docker run --rm -ti --mount type=bind,source="/tmp/common-data",target="/var/common-data",readonly debian:buster /bin/bash
+

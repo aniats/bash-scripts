@@ -34,3 +34,15 @@ sudo docker run --rm debian:buster == запустить контейнер и �
 
 1. sudo docker run --rm -ti --mount type=bind,source="/tmp/common-data",target="/var/common-data",readonly debian:buster /bin/bash
 
+Задача № 8: Предоставление доступа к сетевым службам контейнера
+
+1. sudo docker run --rm -ti --mount type=bind,source="/var/www/docker-static-site",target="/var/www/host-site",readonly -p 8080:80 debian:buster /bin/bash
+2. apt-get update
+3. apt-get install nginx
+4. Create on VM index.html file in /var/www/docker-static-site
+5. apt-get install nano
+6. sudo nano default -> edit root to "root /var/www/host-site;"
+7. nginx -t
+8. /usr/sbin/nginx -g 'daemon on; master_process on;'
+9. Check on VM: curl http://localhost:8080/
+10. /usr/sbin/nginx -s stop
